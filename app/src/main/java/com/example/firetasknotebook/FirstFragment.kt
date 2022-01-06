@@ -33,7 +33,7 @@ class FirstFragment : Fragment() {
             val todos = ArrayList<Todo>()
             for (doc in value!!) {
                 doc.getString("content")?.let {
-                    todos.add(Todo("1234", it))
+                    todos.add(Todo(doc.id, it))
                 }
             }
             recyclerView01.adapter = CustomRecyclerAdapter(todos)
