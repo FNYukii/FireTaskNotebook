@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/drawable/ic_baseline_check_24.xml" value="0.30666666666666664" />
+        <entry key="app/src/main/res/layout/activity_edit.xml" value="0.2953125" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_first.xml" value="0.2111111111111111" />
         <entry key="app/src/main/res/layout/fragment_second.xml" value="0.2111111111111111" />
