@@ -32,9 +32,9 @@ class FirstFragment : Fragment() {
 
             val todos = ArrayList<Todo>()
             for (doc in value!!) {
-                doc.getString("content")?.let {
-                    todos.add(Todo(doc.id, it))
-                }
+                val id = doc.id
+                val content = doc.get("content").toString()
+                todos.add(Todo(id, content))
             }
             recyclerView01.adapter = CustomRecyclerAdapter(todos)
             recyclerView01.layoutManager = LinearLayoutManager(this.context)
