@@ -7,7 +7,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.android.synthetic.main.fragment_first.*
 
 class FirstFragment : Fragment() {
 
@@ -21,10 +23,7 @@ class FirstFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        //TODO: Firestoreのtodosコレクションを取得する
-
         val db = FirebaseFirestore.getInstance()
-
         db.collection("todos").addSnapshotListener { value, e ->
             if (e != null) {
                 Log.w(TAG, "Listen failed!", e)
@@ -37,12 +36,8 @@ class FirstFragment : Fragment() {
                     contents.add(it)
                 }
             }
-            Log.d(TAG, "todo contents: $contents")
+            recyclerView01.adapter = CustomRecyclerAdapter(contents)
+            recyclerView01.layoutManager = LinearLayoutManager(this.context)
         }
-
-
-
-        //TODO: RecyclerViewを表示する
     }
-
 }
