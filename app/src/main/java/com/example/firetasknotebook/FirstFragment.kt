@@ -30,13 +30,13 @@ class FirstFragment : Fragment() {
                 return@addSnapshotListener
             }
 
-            val contents = ArrayList<String>()
+            val todos = ArrayList<Todo>()
             for (doc in value!!) {
                 doc.getString("content")?.let {
-                    contents.add(it)
+                    todos.add(Todo("1234", it))
                 }
             }
-            recyclerView01.adapter = CustomRecyclerAdapter(contents)
+            recyclerView01.adapter = CustomRecyclerAdapter(todos)
             recyclerView01.layoutManager = LinearLayoutManager(this.context)
         }
     }

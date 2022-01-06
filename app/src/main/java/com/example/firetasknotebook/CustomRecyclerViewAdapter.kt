@@ -10,14 +10,14 @@ class ViewHolderList (item: View) : RecyclerView.ViewHolder(item) {
     val characterList: TextView = item.findViewById(R.id.contentText)
 }
 
-class CustomRecyclerAdapter(private val list: ArrayList<String>) : RecyclerView.Adapter<ViewHolderList>() {
+class CustomRecyclerAdapter(private val list: ArrayList<Todo>) : RecyclerView.Adapter<ViewHolderList>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolderList {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.item_todo, parent, false)
         return ViewHolderList(itemView)
     }
 
     override fun onBindViewHolder(holder: ViewHolderList, position: Int) {
-        holder.characterList.text = list[position]
+        holder.characterList.text = list[position].content
     }
 
     override fun getItemCount(): Int = list.size
