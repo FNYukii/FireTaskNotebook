@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "94671424153",
+    "project_id": "firetasknotebook",
+    "storage_bucket": "firetasknotebook.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:94671424153:android:d6a6f258db80c860ea0608",
+        "android_client_info": {
+          "package_name": "com.example.firetasknotebook"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "94671424153-kgglir8ai1chnqfl0ine1e96115l3hs4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB-ylFXygtjgWzkVJQlfEFvAMUKpnr-Yq0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "94671424153-kgglir8ai1chnqfl0ine1e96115l3hs4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
