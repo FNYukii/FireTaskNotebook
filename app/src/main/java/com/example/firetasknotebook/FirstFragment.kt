@@ -23,21 +23,23 @@ class FirstFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val todos = ArrayList<Todo>()
+
+        //todosコレクションを取得
         val db = FirebaseFirestore.getInstance()
         db.collection("todos").addSnapshotListener { value, e ->
             if (e != null) {
                 Log.w(TAG, "Listen failed!", e)
                 return@addSnapshotListener
             }
-
-            val todos = ArrayList<Todo>()
             for (doc in value!!) {
                 val id = doc.id
                 val content = doc.get("content").toString()
                 todos.add(Todo(id, content))
             }
-            recyclerView01.adapter = CustomRecyclerAdapter(todos)
-            recyclerView01.layoutManager = LinearLayoutManager(this.context)
         }
+
+        recyclerView01.adapter = CustomRecyclerAdapter(todos)
+        recyclerView01.layoutManager = LinearLayoutManager(this.context)
     }
 }
