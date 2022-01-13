@@ -33,7 +33,10 @@ class FirstFragment : Fragment() {
 
         //todosコレクションのスナップショットを取得して表示
         val db = FirebaseFirestore.getInstance()
-        db.collection("todos").orderBy("created_at", Query.Direction.DESCENDING).addSnapshotListener { value, e ->
+        db.collection("todos")
+            .whereEqualTo("isAchieved", false)
+            .orderBy("created_at", Query.Direction.DESCENDING)
+            .addSnapshotListener { value, e ->
             if (e != null) {
                 Log.w(TAG, "Listen failed!", e)
                 return@addSnapshotListener
