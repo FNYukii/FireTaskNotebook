@@ -49,6 +49,7 @@ class FirstFragment : Fragment() {
                 todos.add(Todo(id, content))
             }
 
+            //TODO: RecyclerViewを自動更新する
             recyclerView01.adapter = CustomRecyclerAdapter(todos)
             recyclerView01.layoutManager = LinearLayoutManager(this.context)
         }
