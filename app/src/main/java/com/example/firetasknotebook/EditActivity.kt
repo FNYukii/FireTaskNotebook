@@ -1,8 +1,10 @@
 package com.example.firetasknotebook
 
+import android.content.ContentValues.TAG
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
+import android.util.Log
+import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_edit.*
 import java.util.*
 
@@ -10,7 +12,7 @@ class EditActivity : AppCompatActivity() {
 
     private var id = 0
     private var isAchieved = false
-    private var achievedDate: Date? = null
+    private var achievedAt: Date? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,7 +35,7 @@ class EditActivity : AppCompatActivity() {
         achieveButton.setOnClickListener {
             isAchieved = !isAchieved
             if (isAchieved) {
-                achievedDate = Date()
+                achievedAt = Date()
             }
             saveTodo()
             finish()
@@ -59,7 +61,22 @@ class EditActivity : AppCompatActivity() {
     }
 
     private fun insertTodo() {
-        //TODO: Firestoreに新規ドキュメントを追加する
+        val db = FirebaseFirestore.getInstance()
+
+        val data = hashMapOf(
+            "content" to contentEdit.text.toString(),
+            "isAchieved" to isAchieved,
+            "achieved_at" to com.google.firebase.Timestamp(Date())
+        )
+
+        db.collection("todos")
+            .add(data)
+            .addOnSuccessListener { documentReference ->
+                Log.d(TAG, "DocumentSnapshot written with ID: ${documentReference.id}")
+            }
+            .addOnFailureListener { e ->
+                Log.w(TAG, "Error adding document", e)
+            }
     }
 
     private fun updateTodo() {
