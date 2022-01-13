@@ -50,9 +50,6 @@ class EditActivity : AppCompatActivity() {
                 }
         }
 
-        Log.d(TAG, "id: $id")
-
-
         backButton.setOnClickListener {
             saveTodo()
             finish()
