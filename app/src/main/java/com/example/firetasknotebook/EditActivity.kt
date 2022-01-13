@@ -20,7 +20,7 @@ class EditActivity : AppCompatActivity() {
         setContentView(R.layout.activity_edit)
 
         //既存Todo編集時は、編集対象ドキュメントのidを取得
-        id = intent.getStringExtra(id)
+        id = intent.getStringExtra("id")
 
         //既存Todo更新時
         if(id != null){
