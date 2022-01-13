@@ -1,11 +1,15 @@
 package com.example.firetasknotebook
 
+import android.annotation.SuppressLint
 import android.content.ContentValues.TAG
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_edit.*
+import java.text.SimpleDateFormat
+import java.time.ZoneId
 import java.util.*
 
 class EditActivity : AppCompatActivity() {
@@ -43,6 +47,11 @@ class EditActivity : AppCompatActivity() {
                     val timestamp = document.getTimestamp("achieved_at")
                     if (timestamp != null) {
                         achievedAt = timestamp.toDate()
+                    }
+                    //達成済みなら達成日時を表示する
+                    if (isAchieved) {
+                        achievedAtContainer.visibility = View.VISIBLE
+                        setAchievedDateTimeText()
                     }
                 }
                 .addOnFailureListener { exception ->
@@ -128,5 +137,33 @@ class EditActivity : AppCompatActivity() {
             .delete()
             .addOnSuccessListener { Log.d(TAG, "DocumentSnapshot successfully deleted!") }
             .addOnFailureListener { e -> Log.w(TAG, "Error deleting document", e) }
+    }
+
+    @SuppressLint("SimpleDateFormat")
+    private fun setAchievedDateTimeText(){
+        //達成年日の文字列を生成
+        val dateFormatter = SimpleDateFormat("yyyy年 M月 d日")
+        val achievedDateString: String = dateFormatter.format(achievedAt!!)
+
+        //達成曜日の文字列を生成
+        val achievedLocalDate = achievedAt!!.toInstant().atZone(ZoneId.systemDefault()).toLocalDate()
+        val achievedDayOfWeek: Int =  achievedLocalDate.dayOfWeek.value
+        var achievedDayOfWeekString = ""
+        when(achievedDayOfWeek){
+            1 -> achievedDayOfWeekString = " (日)"
+            2 -> achievedDayOfWeekString = " (月)"
+            3 -> achievedDayOfWeekString = " (火)"
+            4 -> achievedDayOfWeekString = " (水)"
+            5 -> achievedDayOfWeekString = " (木)"
+            6 -> achievedDayOfWeekString = " (金)"
+            7 -> achievedDayOfWeekString = " (土)"
+        }
+
+        //達成日をTextViewへセット
+        achievedDateText.text = (achievedDateString + achievedDayOfWeekString)
+
+        //達成時刻をTextViewへセット
+        val timeFormatter = SimpleDateFormat("HH:mm")
+        achievedTimeText.text = timeFormatter.format(achievedAt!!)
     }
 }

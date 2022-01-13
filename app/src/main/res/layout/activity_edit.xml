@@ -57,7 +57,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <LinearLayout
-        android:id="@+id/achievedDatetimeContainer"
+        android:id="@+id/achievedAtContainer"
         android:visibility="gone"
         app:layout_constraintTop_toBottomOf="@id/toolbar"
         app:layout_constraintStart_toStartOf="parent"
@@ -100,7 +100,7 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:hint="Todoを入力"
         android:background="@null"
-        app:layout_constraintTop_toBottomOf="@id/achievedDatetimeContainer"
+        app:layout_constraintTop_toBottomOf="@id/achievedAtContainer"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
