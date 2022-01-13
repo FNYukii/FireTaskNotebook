@@ -68,7 +68,9 @@ class EditActivity : AppCompatActivity() {
         }
 
         deleteButton.setOnClickListener {
-            deleteTodo()
+            if (id != null) {
+                deleteTodo()
+            }
             finish()
         }
     }
@@ -123,7 +125,11 @@ class EditActivity : AppCompatActivity() {
     }
 
     private fun deleteTodo() {
-        //TODO: Firestore上のドキュメントを削除する
-    }
+        val db = FirebaseFirestore.getInstance()
 
+        db.collection("todos").document(id!!)
+            .delete()
+            .addOnSuccessListener { Log.d(TAG, "DocumentSnapshot successfully deleted!") }
+            .addOnFailureListener { e -> Log.w(TAG, "Error deleting document", e) }
+    }
 }
