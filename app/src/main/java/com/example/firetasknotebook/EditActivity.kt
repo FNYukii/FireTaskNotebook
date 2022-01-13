@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_edit.*
 import java.util.*
 
@@ -19,13 +20,36 @@ class EditActivity : AppCompatActivity() {
         setContentView(R.layout.activity_edit)
 
         //既存Todo編集時は、編集対象ドキュメントのidを取得
-        id = intent.getStringExtra("id").toString()
+        val extraValue = intent.getStringExtra("id")
+        if(extraValue != null) {
+            id = extraValue
+        }
 
         //既存Todo更新時
         if(id != null){
-            //TODO: 編集対象のドキュメントを取得する
-            //TODO: 各変数へ値を格納する
+            //編集対象のドキュメントを取得する
+            val db = FirebaseFirestore.getInstance()
+
+            val docRef = db.collection("todos").document(id!!)
+            docRef.get()
+                .addOnSuccessListener { document ->
+                    if (document != null) {
+                        Log.d(TAG, "DocumentSnapshot data: ${document.data}")
+                    } else {
+                        Log.d(TAG, "No such document")
+                    }
+
+                    //各変数へ値を格納する
+                    contentEdit.setText(document.getString("content"))
+
+                }
+                .addOnFailureListener { exception ->
+                    Log.d(TAG, "get failed with ", exception)
+                }
         }
+
+        Log.d(TAG, "id: $id")
+
 
         backButton.setOnClickListener {
             saveTodo()
