@@ -5,13 +5,13 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_edit.*
 import java.util.*
 
 class EditActivity : AppCompatActivity() {
 
     private var id: String? = null
+    private var createdAt = Date()
     private var isAchieved = false
     private var achievedAt: Date? = null
 
@@ -38,7 +38,12 @@ class EditActivity : AppCompatActivity() {
 
                     //各変数へ値を格納する
                     contentEdit.setText(document.getString("content"))
-
+                    createdAt = document.getTimestamp("created_at")!!.toDate()
+                    isAchieved = document.getBoolean("isAchieved")!!
+                    val timestamp = document.getTimestamp("achieved_at")
+                    if (timestamp != null) {
+                        achievedAt = timestamp.toDate()
+                    }
                 }
                 .addOnFailureListener { exception ->
                     Log.d(TAG, "get failed with ", exception)
@@ -86,8 +91,8 @@ class EditActivity : AppCompatActivity() {
 
         val data = hashMapOf(
             "content" to contentEdit.text.toString(),
-            "isAchieved" to isAchieved,
             "created_at" to com.google.firebase.Timestamp(Date()),
+            "isAchieved" to isAchieved,
             "achieved_at" to achievedAt?.let { com.google.firebase.Timestamp(it) }
         )
 
@@ -103,6 +108,19 @@ class EditActivity : AppCompatActivity() {
 
     private fun updateTodo() {
         //TODO: Firestore上のドキュメントを更新する
+        val db = FirebaseFirestore.getInstance()
+
+        val todo = hashMapOf(
+            "content" to contentEdit.text.toString(),
+            "isAchieved" to isAchieved,
+            "created_at" to com.google.firebase.Timestamp(createdAt),
+            "achieved_at" to achievedAt?.let { com.google.firebase.Timestamp(it) }
+        )
+
+        db.collection("todos").document(id!!)
+            .set(todo)
+            .addOnSuccessListener { Log.d(TAG, "DocumentSnapshot successfully written!") }
+            .addOnFailureListener { e -> Log.w(TAG, "Error writing document", e) }
     }
 
     private fun deleteTodo() {
