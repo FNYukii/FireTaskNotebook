@@ -10,7 +10,7 @@ import java.util.*
 
 class EditActivity : AppCompatActivity() {
 
-    private var id = 0
+    private var id: String? = null
     private var isAchieved = false
     private var achievedAt: Date? = null
 
@@ -18,11 +18,11 @@ class EditActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit)
 
-        //Intentにidがあれば取得
-        id = intent.getIntExtra("id", 0)
+        //既存Todo編集時は、編集対象ドキュメントのidを取得
+        id = intent.getStringExtra("id").toString()
 
         //既存Todo更新時
-        if(id != 0){
+        if(id != null){
             //TODO: 編集対象のドキュメントを取得する
             //TODO: 各変数へ値を格納する
         }
@@ -53,9 +53,9 @@ class EditActivity : AppCompatActivity() {
     }
 
     private fun saveTodo() {
-        if (id == 0 && contentEdit.text.isNotEmpty()){
+        if (id == null && contentEdit.text.isNotEmpty()){
             insertTodo()
-        } else if (id != 0 && contentEdit.text.isNotEmpty()) {
+        } else if (id != null && contentEdit.text.isNotEmpty()) {
             updateTodo()
         }
     }
