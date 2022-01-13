@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- part colors -->
+    <color name="appBackground">#222222</color>
+    <color name="bottomNavigationBackground">#333333</color>
+
+</resources>

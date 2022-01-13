@@ -18,7 +18,7 @@
         android:src="@drawable/ic_baseline_add_24"
         app:tint="@null"
         android:tint="@color/white"
-        android:backgroundTint="#FF6464"
+        android:backgroundTint="@color/accentColor"
         app:borderWidth="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
