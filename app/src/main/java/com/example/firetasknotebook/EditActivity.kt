@@ -107,7 +107,6 @@ class EditActivity : AppCompatActivity() {
     }
 
     private fun updateTodo() {
-        //TODO: Firestore上のドキュメントを更新する
         val db = FirebaseFirestore.getInstance()
 
         val todo = hashMapOf(
