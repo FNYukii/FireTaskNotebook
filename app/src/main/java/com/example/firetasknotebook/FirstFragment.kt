@@ -31,7 +31,7 @@ class FirstFragment : Fragment() {
             startActivity(intent)
         }
 
-        //todosコレクションを取得して表示
+        //todosコレクションのスナップショットを取得して表示
         val db = FirebaseFirestore.getInstance()
         db.collection("todos").orderBy("created_at", Query.Direction.DESCENDING).addSnapshotListener { value, e ->
             if (e != null) {
