@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
 import kotlinx.android.synthetic.main.fragment_first.*
 
 class FirstFragment : Fragment() {
@@ -32,7 +33,7 @@ class FirstFragment : Fragment() {
 
         //todosコレクションを取得して表示
         val db = FirebaseFirestore.getInstance()
-        db.collection("todos").addSnapshotListener { value, e ->
+        db.collection("todos").orderBy("created_at", Query.Direction.DESCENDING).addSnapshotListener { value, e ->
             if (e != null) {
                 Log.w(TAG, "Listen failed!", e)
                 return@addSnapshotListener

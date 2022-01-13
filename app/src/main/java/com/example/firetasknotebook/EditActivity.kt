@@ -66,7 +66,8 @@ class EditActivity : AppCompatActivity() {
         val data = hashMapOf(
             "content" to contentEdit.text.toString(),
             "isAchieved" to isAchieved,
-            "achieved_at" to com.google.firebase.Timestamp(Date())
+            "created_at" to com.google.firebase.Timestamp(Date()),
+            "achieved_at" to achievedAt?.let { com.google.firebase.Timestamp(it) }
         )
 
         db.collection("todos")
