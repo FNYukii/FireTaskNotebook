@@ -15,4 +15,9 @@
         android:name="com.example.firetasknotebook.SecondFragment"
         tools:layout="@layout/fragment_second" />
 
+    <fragment
+        android:id="@+id/navigation_third"
+        android:name="com.example.firetasknotebook.ThirdFragment"
+        tools:layout="@layout/fragment_third" />
+
 </navigation>
