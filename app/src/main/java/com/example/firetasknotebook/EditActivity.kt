@@ -107,10 +107,10 @@ class EditActivity : AppCompatActivity() {
         db.collection("todos")
             .add(data)
             .addOnSuccessListener { documentReference ->
-                Log.d(TAG, "DocumentSnapshot written with ID: ${documentReference.id}")
+                Log.d(TAG, "ドキュメント追加成功! ID: ${documentReference.id}")
             }
             .addOnFailureListener { e ->
-                Log.w(TAG, "Error adding document", e)
+                Log.w(TAG, "ドキュメント追加失敗", e)
             }
     }
 
@@ -126,8 +126,8 @@ class EditActivity : AppCompatActivity() {
 
         db.collection("todos").document(id!!)
             .set(todo)
-            .addOnSuccessListener { Log.d(TAG, "DocumentSnapshot successfully written!") }
-            .addOnFailureListener { e -> Log.w(TAG, "Error writing document", e) }
+            .addOnSuccessListener { Log.d(TAG, "ドキュメント更新成功!") }
+            .addOnFailureListener { e -> Log.w(TAG, "ドキュメント更新失敗!", e) }
     }
 
     private fun deleteTodo() {
@@ -135,8 +135,8 @@ class EditActivity : AppCompatActivity() {
 
         db.collection("todos").document(id!!)
             .delete()
-            .addOnSuccessListener { Log.d(TAG, "DocumentSnapshot successfully deleted!") }
-            .addOnFailureListener { e -> Log.w(TAG, "Error deleting document", e) }
+            .addOnSuccessListener { Log.d(TAG, "ドキュメント削除成功!") }
+            .addOnFailureListener { e -> Log.w(TAG, "ドキュメント削除失敗!", e) }
     }
 
     @SuppressLint("SimpleDateFormat")

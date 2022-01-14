@@ -38,7 +38,7 @@ class FirstFragment : Fragment() {
             .orderBy("created_at", Query.Direction.DESCENDING)
             .addSnapshotListener { value, e ->
             if (e != null) {
-                Log.w(TAG, "Listen failed!", e)
+                Log.w(TAG, "Snapshotリッスン失敗!", e)
                 return@addSnapshotListener
             }
 
