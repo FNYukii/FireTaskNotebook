@@ -31,27 +31,30 @@ class FirstFragment : Fragment() {
             startActivity(intent)
         }
 
+        recyclerView01.layoutManager = LinearLayoutManager(this.context)
+    }
+
+    override fun onStart() {
+        super.onStart()
+
         //RecyclerView with Cloud Firestore
         val db = FirebaseFirestore.getInstance()
         db.collection("todos")
             .whereEqualTo("isAchieved", false)
             .orderBy("created_at", Query.Direction.DESCENDING)
             .addSnapshotListener { value, e ->
-            if (e != null) {
-                Log.w(TAG, "Snapshotリッスン失敗!", e)
-                return@addSnapshotListener
-            }
+                if (e != null) {
+                    Log.w(TAG, "Snapshotリッスン失敗!", e)
+                    return@addSnapshotListener
+                }
 
-            val todos = ArrayList<Todo>()
-            for (doc in value!!) {
-                val id = doc.id
-                val content = doc.get("content").toString()
-                todos.add(Todo(id, content))
+                val todos = ArrayList<Todo>()
+                for (doc in value!!) {
+                    val id = doc.id
+                    val content = doc.get("content").toString()
+                    todos.add(Todo(id, content))
+                }
+                recyclerView01.adapter = TodoRecyclerViewAdapter(todos)
             }
-
-            //TODO: RecyclerViewを自動更新する
-            recyclerView01.adapter = TodoRecyclerViewAdapter(todos)
-            recyclerView01.layoutManager = LinearLayoutManager(this.context)
-        }
     }
 }

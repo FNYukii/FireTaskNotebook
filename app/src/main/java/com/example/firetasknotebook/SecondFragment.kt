@@ -25,27 +25,30 @@ class SecondFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        //todosコレクションのスナップショットを取得して表示
+        recyclerView02.layoutManager = LinearLayoutManager(this.context)
+    }
+
+    override fun onStart() {
+        super.onStart()
+
+        //RecyclerView with Cloud Firestore
         val db = FirebaseFirestore.getInstance()
         db.collection("todos")
             .whereEqualTo("isAchieved", true)
             .orderBy("created_at", Query.Direction.DESCENDING)
             .addSnapshotListener { value, e ->
-            if (e != null) {
-                Log.w(ContentValues.TAG, "Snapshotリッスン失敗!", e)
-                return@addSnapshotListener
-            }
+                if (e != null) {
+                    Log.w(ContentValues.TAG, "Snapshotリッスン失敗!", e)
+                    return@addSnapshotListener
+                }
 
-            val todos = ArrayList<Todo>()
-            for (doc in value!!) {
-                val id = doc.id
-                val content = doc.get("content").toString()
-                todos.add(Todo(id, content))
+                val todos = ArrayList<Todo>()
+                for (doc in value!!) {
+                    val id = doc.id
+                    val content = doc.get("content").toString()
+                    todos.add(Todo(id, content))
+                }
+                recyclerView02.adapter = TodoRecyclerViewAdapter(todos)
             }
-
-            recyclerView02.adapter = TodoRecyclerViewAdapter(todos)
-            recyclerView02.layoutManager = LinearLayoutManager(this.context)
-        }
     }
-
 }
