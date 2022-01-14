@@ -1,8 +1,9 @@
 package com.example.firetasknotebook
 
-import java.time.LocalDateTime
+import com.google.firebase.firestore.DocumentId
 
-class Todo(id: String, content: String) {
-    var id: String = id
-    val content: String = content
-}
+data class Todo(
+    @DocumentId
+    var id: String = "",
+    val content: String = ""
+)

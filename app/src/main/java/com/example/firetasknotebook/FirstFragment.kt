@@ -49,11 +49,10 @@ class FirstFragment : Fragment() {
                 }
 
                 val todos = ArrayList<Todo>()
-                for (doc in value!!) {
-                    val id = doc.id
-                    val content = doc.get("content").toString()
-                    todos.add(Todo(id, content))
+                value!!.forEach {
+                    todos.add(it.toObject(Todo::class.java))
                 }
+
                 recyclerView01.adapter = TodoRecyclerViewAdapter(todos)
             }
     }
