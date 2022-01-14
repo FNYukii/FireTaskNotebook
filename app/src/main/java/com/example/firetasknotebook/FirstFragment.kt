@@ -50,7 +50,7 @@ class FirstFragment : Fragment() {
             }
 
             //TODO: RecyclerViewを自動更新する
-            recyclerView01.adapter = CustomRecyclerAdapter(todos)
+            recyclerView01.adapter = TodoRecyclerAdapter(todos)
             recyclerView01.layoutManager = LinearLayoutManager(this.context)
         }
     }

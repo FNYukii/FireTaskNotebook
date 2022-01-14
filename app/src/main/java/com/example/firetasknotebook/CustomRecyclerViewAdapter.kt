@@ -7,17 +7,17 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class ViewHolderList (item: View) : RecyclerView.ViewHolder(item) {
+class TodoViewHolder (item: View) : RecyclerView.ViewHolder(item) {
     val contentText: TextView = item.findViewById(R.id.contentText)
 }
 
-class CustomRecyclerAdapter(private val todos: ArrayList<Todo>) : RecyclerView.Adapter<ViewHolderList>() {
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolderList {
+class TodoRecyclerAdapter(private val todos: ArrayList<Todo>) : RecyclerView.Adapter<TodoViewHolder>() {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TodoViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.one_todo, parent, false)
-        return ViewHolderList(itemView)
+        return TodoViewHolder(itemView)
     }
 
-    override fun onBindViewHolder(holder: ViewHolderList, position: Int) {
+    override fun onBindViewHolder(holder: TodoViewHolder, position: Int) {
         holder.contentText.text = todos[position].content
         holder.itemView.setOnClickListener {
             val intent = Intent(it.context, EditActivity::class.java)

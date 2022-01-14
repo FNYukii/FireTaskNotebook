@@ -43,7 +43,7 @@ class SecondFragment : Fragment() {
                 todos.add(Todo(id, content))
             }
 
-            recyclerView02.adapter = CustomRecyclerAdapter(todos)
+            recyclerView02.adapter = TodoRecyclerAdapter(todos)
             recyclerView02.layoutManager = LinearLayoutManager(this.context)
         }
     }
