@@ -48,8 +48,9 @@ class EditActivity : AppCompatActivity() {
                     if (timestamp != null) {
                         achievedAt = timestamp.toDate()
                     }
-                    //達成済みなら達成日時を表示する
+                    //達成済みなら達成ボタンのアイコンを変更&達成日時を表示する
                     if (isAchieved) {
+                        achieveButton.setImageResource(R.drawable.ic_baseline_close_24)
                         achievedAtContainer.visibility = View.VISIBLE
                         setAchievedDateTimeText()
                     }
