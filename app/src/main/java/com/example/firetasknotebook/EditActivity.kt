@@ -66,8 +66,10 @@ class EditActivity : AppCompatActivity() {
 
         achieveButton.setOnClickListener {
             isAchieved = !isAchieved
-            if (isAchieved) {
-                achievedAt = Date()
+            achievedAt = if (isAchieved) {
+                Date()
+            } else {
+                null
             }
             saveTodo()
             finish()
