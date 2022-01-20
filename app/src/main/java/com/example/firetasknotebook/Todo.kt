@@ -8,6 +8,6 @@ data class Todo(
     var id: String = "",
     val content: String = "",
     val isAchieved: Boolean = false,
-    val created_at: Timestamp? = null,
-    val achieved_at: Timestamp? = null,
+    val createdAt: Timestamp? = null,
+    val achievedAt: Timestamp? = null,
 )
