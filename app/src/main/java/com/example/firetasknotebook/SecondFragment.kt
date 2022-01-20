@@ -31,23 +31,19 @@ class SecondFragment : Fragment() {
     override fun onStart() {
         super.onStart()
 
-        //RecyclerView with Cloud Firestore
         val db = FirebaseFirestore.getInstance()
         db.collection("todos")
             .whereEqualTo("isAchieved", true)
-            .orderBy("created_at", Query.Direction.DESCENDING)
-            .addSnapshotListener { value, e ->
-                if (e != null) {
-                    Log.w(ContentValues.TAG, "Snapshotリッスン失敗!", e)
-                    return@addSnapshotListener
-                }
-
+            .get()
+            .addOnSuccessListener { documents ->
                 val todos = ArrayList<Todo>()
-                value!!.forEach {
+                documents.forEach {
                     todos.add(it.toObject(Todo::class.java))
                 }
-
                 recyclerView02.adapter = TodoRecyclerViewAdapter(todos)
+            }
+            .addOnFailureListener {
+                Log.d("hello", "失敗")
             }
     }
 }

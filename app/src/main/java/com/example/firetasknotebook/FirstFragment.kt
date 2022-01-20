@@ -1,6 +1,5 @@
 package com.example.firetasknotebook
 
-import android.content.ContentValues.TAG
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -37,23 +36,19 @@ class FirstFragment : Fragment() {
     override fun onStart() {
         super.onStart()
 
-        //RecyclerView with Cloud Firestore
         val db = FirebaseFirestore.getInstance()
         db.collection("todos")
             .whereEqualTo("isAchieved", false)
-            .orderBy("created_at", Query.Direction.DESCENDING)
-            .addSnapshotListener { value, e ->
-                if (e != null) {
-                    Log.w(TAG, "Snapshotリッスン失敗!", e)
-                    return@addSnapshotListener
-                }
-
+            .get()
+            .addOnSuccessListener { documents ->
                 val todos = ArrayList<Todo>()
-                value!!.forEach {
+                documents.forEach {
                     todos.add(it.toObject(Todo::class.java))
                 }
-
                 recyclerView01.adapter = TodoRecyclerViewAdapter(todos)
+            }
+            .addOnFailureListener {
+                Log.d("hello", "失敗")
             }
     }
 }
