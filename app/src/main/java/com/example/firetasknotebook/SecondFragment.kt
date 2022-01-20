@@ -1,6 +1,5 @@
 package com.example.firetasknotebook
 
-import android.content.ContentValues
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -9,8 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.Query
-import kotlinx.android.synthetic.main.fragment_first.*
 import kotlinx.android.synthetic.main.fragment_second.*
 
 class SecondFragment : Fragment() {
@@ -36,10 +33,21 @@ class SecondFragment : Fragment() {
             .whereEqualTo("isAchieved", true)
             .get()
             .addOnSuccessListener { documents ->
+
+                //Convert documents to todos
                 val todos = ArrayList<Todo>()
                 documents.forEach {
                     todos.add(it.toObject(Todo::class.java))
                 }
+
+                //Set message text visibility
+                if (todos.size == 0) {
+                    noAchievedTodoText.visibility = View.VISIBLE
+                } else {
+                    noAchievedTodoText.visibility = View.INVISIBLE
+                }
+
+                //Set adapter with todos
                 recyclerView02.adapter = TodoRecyclerViewAdapter(todos)
             }
             .addOnFailureListener {

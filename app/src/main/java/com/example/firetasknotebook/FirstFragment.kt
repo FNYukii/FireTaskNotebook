@@ -9,7 +9,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.Query
 import kotlinx.android.synthetic.main.fragment_first.*
 
 class FirstFragment : Fragment() {
@@ -41,10 +40,21 @@ class FirstFragment : Fragment() {
             .whereEqualTo("isAchieved", false)
             .get()
             .addOnSuccessListener { documents ->
+
+                //Convert documents to todos
                 val todos = ArrayList<Todo>()
                 documents.forEach {
                     todos.add(it.toObject(Todo::class.java))
                 }
+
+                //Set message text visibility
+                if (todos.size == 0) {
+                    noUnachievedTodoText.visibility = View.VISIBLE
+                } else {
+                    noUnachievedTodoText.visibility = View.INVISIBLE
+                }
+
+                //Set adapter with todos
                 recyclerView01.adapter = TodoRecyclerViewAdapter(todos)
             }
             .addOnFailureListener {

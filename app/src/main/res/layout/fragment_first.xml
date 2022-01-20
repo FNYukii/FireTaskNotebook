@@ -11,6 +11,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
+    <TextView
+        android:id="@+id/noUnachievedTodoText"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="未達成のTodoはありません"
+        android:visibility="invisible"
+        android:gravity="center"/>
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="wrap_content"

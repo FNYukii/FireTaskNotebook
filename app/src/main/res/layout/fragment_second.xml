@@ -11,4 +11,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
+    <TextView
+        android:id="@+id/noAchievedTodoText"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="達成済みのTodoはありません"
+        android:visibility="invisible"
+        android:gravity="center"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
