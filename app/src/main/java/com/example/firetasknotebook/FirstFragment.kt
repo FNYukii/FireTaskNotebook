@@ -29,12 +29,14 @@ class FirstFragment : Fragment() {
             startActivity(intent)
         }
 
+        //Set recyclerView layout manager
         recyclerView01.layoutManager = LinearLayoutManager(this.context)
     }
 
     override fun onStart() {
         super.onStart()
 
+        //Get documents from Cloud Firestore
         val db = FirebaseFirestore.getInstance()
         db.collection("todos")
             .whereEqualTo("isAchieved", false)
@@ -54,7 +56,7 @@ class FirstFragment : Fragment() {
                     noUnachievedTodoText.visibility = View.INVISIBLE
                 }
 
-                //Set adapter with todos
+                //Set recyclerView adapter with todos
                 recyclerView01.adapter = TodoRecyclerViewAdapter(todos)
             }
             .addOnFailureListener {

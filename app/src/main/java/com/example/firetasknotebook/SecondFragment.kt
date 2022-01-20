@@ -34,20 +34,17 @@ class SecondFragment : Fragment() {
             .get()
             .addOnSuccessListener { documents ->
 
-                //Convert documents to todos
                 val todos = ArrayList<Todo>()
                 documents.forEach {
                     todos.add(it.toObject(Todo::class.java))
                 }
 
-                //Set message text visibility
                 if (todos.size == 0) {
                     noAchievedTodoText.visibility = View.VISIBLE
                 } else {
                     noAchievedTodoText.visibility = View.INVISIBLE
                 }
 
-                //Set adapter with todos
                 recyclerView02.adapter = TodoRecyclerViewAdapter(todos)
             }
             .addOnFailureListener {
