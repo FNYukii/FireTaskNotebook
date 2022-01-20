@@ -6,9 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.android.synthetic.main.one_todo.view.*
 
 class TodoViewHolder (item: View) : RecyclerView.ViewHolder(item) {
-    val contentText: TextView = item.findViewById(R.id.contentText)
+    val contentText: TextView = item.contentText
 }
 
 class TodoRecyclerViewAdapter(private val todos: ArrayList<Todo>) : RecyclerView.Adapter<TodoViewHolder>() {
