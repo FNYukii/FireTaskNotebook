@@ -102,9 +102,9 @@ class EditActivity : AppCompatActivity() {
 
         val data = hashMapOf(
             "content" to contentEdit.text.toString(),
-            "created_at" to com.google.firebase.Timestamp(Date()),
             "isAchieved" to isAchieved,
-            "achieved_at" to achievedAt?.let { com.google.firebase.Timestamp(it) }
+            "created_at" to com.google.firebase.Timestamp(Date()),
+            "achieved_at" to achievedAt?.let { com.google.firebase.Timestamp(it) },
         )
 
         db.collection("todos")
@@ -124,7 +124,7 @@ class EditActivity : AppCompatActivity() {
             "content" to contentEdit.text.toString(),
             "isAchieved" to isAchieved,
             "created_at" to com.google.firebase.Timestamp(createdAt),
-            "achieved_at" to achievedAt?.let { com.google.firebase.Timestamp(it) }
+            "achieved_at" to achievedAt?.let { com.google.firebase.Timestamp(it) },
         )
 
         db.collection("todos").document(id!!)
