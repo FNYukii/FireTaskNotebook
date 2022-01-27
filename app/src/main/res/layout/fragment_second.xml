@@ -16,6 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:text="達成済みのTodoはありません"
+        android:textSize="20dp"
         android:visibility="invisible"
         android:gravity="center"/>
 
